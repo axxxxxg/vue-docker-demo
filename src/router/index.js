@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import CreateCampaign from '@/pages/createCampaign'
+import CreateCampaign from '@/pages/createCampaign/Index'
 
 Vue.use(Router)
 
