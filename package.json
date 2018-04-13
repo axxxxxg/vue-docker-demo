@@ -11,7 +11,7 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build:prod": "cross-env NODE_ENV=production node build/build.js",
-    "build:beta": "cross-env NODE_ENV=beta node build/build.js",
+    "build:sit": "cross-env NODE_ENV=sit node build/build.js",
     "build:uat": "cross-env NODE_ENV=uat node build/build.js",
     "build": "npm run build:prod"
   },
