@@ -1,41 +1,8 @@
 const nodeExternals = require('webpack-node-externals')
-const path = require('path')
+const baseWebpackConfig = require('../build/webpack.base.conf')
+const merge = require('webpack-merge')
 
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
-}
-
-module.exports = {
-  context: path.resolve(__dirname, '../'),
-  entry: {
-    app: './src/main.js'
-  },
-  resolve: {
-    extensions: ['.js', '.vue'],
-    alias: {
-      '@': resolve('src'),
-    }
-  },
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
-    ]
-  },
+module.exports = merge(baseWebpackConfig, {
   externals: [nodeExternals()],
   devtool: 'inline-cheap-module-source-map',
-}
+})

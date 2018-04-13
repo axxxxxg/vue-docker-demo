@@ -1,57 +1,58 @@
 <template>
-  <div class="section">
+  <div id="create-campagin">
     <p class="title">创建活动</p>
-    <div class="input-group">
-      <label class="label-name">活动名称: </label>
-      <input type="text" class="el-input__inner re-input" v-model="campaignName" placeholder="请输入活动名称">
-    </div>
-    <div class="input-group">
-      <label class="label-name">活动时间: </label>
-      <el-date-picker
-        v-model="campaignTime"
-        type="datetimerange"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        align="left"
-        name="campaign-time">
-      </el-date-picker>
-    </div>
-    <hr>
-    <div class="input-group">
-      <p class="label-name rules">拼团规则: </p>
-      <div class="rules-content">
-        <label class="label-name">拼团时效：</label>
-        <el-input-number name="team-valid" v-model="teamValid" :min="1" label="拼团时效"></el-input-number>
-        <el-tag name="team-valid-tag" class="tag" type="warning"><i class="el-icon-bell icon"></i>单位: 小时</el-tag>
-        <div class="input-group">
-          <label class="label-name">拼团折扣：</label>
-          <el-input-number name="team-discount" v-model="discount" :min="0.1" :step="0.1" :max="10" label="拼团折扣"></el-input-number>
-          <el-tag name="team-discount-tag" class="tag" type="warning"><i class="el-icon-bell icon"></i>例如: 八五折对于8.5</el-tag>
-        </div>
-        <div class="input-group">
-          <label class="label-name">成团人数：</label>
-          <el-input-number name="people-num" v-model="peopleNum" :min="2" :step="1" label="成团人数"></el-input-number>
+    <div class="content">
+      <div class="input-group">
+        <label class="label-name">活动名称: </label>
+        <input type="text" class="el-input__inner re-input" v-model="campaignName" placeholder="请输入活动名称">
+      </div>
+      <div class="input-group">
+        <label class="label-name">活动时间: </label>
+        <el-date-picker
+          v-model="campaignTime"
+          type="datetimerange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          align="left">
+        </el-date-picker>
+      </div>
+      <hr>
+      <div class="input-group">
+        <p class="label-name rules">拼团规则: </p>
+        <div class="rules-content">
+          <label class="label-name">拼团时效：</label>
+          <el-input-number v-model="teamValid" :min="1" label="拼团时效"></el-input-number>
+          <el-tag name="team-valid-tag" class="tag" type="warning"><i class="el-icon-bell icon"></i>单位: 小时</el-tag>
+          <div class="input-group">
+            <label class="label-name">拼团折扣：</label>
+            <el-input-number v-model="discount" :min="0.1" :step="0.1" :max="10" label="拼团折扣"></el-input-number>
+            <el-tag class="tag" type="warning"><i class="el-icon-bell icon"></i>例如: 八五折对于8.5</el-tag>
+          </div>
+          <div class="input-group">
+            <label class="label-name">成团人数：</label>
+            <el-input-number v-model="peopleNum" :min="2" :step="1" label="成团人数"></el-input-number>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="input-group">
-      <p class="label-name">拼团商品</p>
-      <div class="goods-list">
-        <div class="button-group">
-          <el-button name="add-btn" type="primary" icon="el-icon-plus">新增</el-button>
+      <div class="input-group">
+        <p class="label-name">拼团商品</p>
+        <div class="goods-list">
+          <div class="button-group">
+            <button class="new-add"><i class="el-icon-plus"></i>新增</button>
+          </div>
+          <el-table :data="goodsData" stripe height="450">
+            <el-table-column align="center" prop="name" label="商品名称"></el-table-column>
+            <el-table-column align="center" prop="stock" label="库存"></el-table-column>
+            <el-table-column align="center" prop="teamBuyPrice" label="拼团价格"></el-table-column>
+            <el-table-column align="center" prop="discountPrice" label="单团优惠估算"> </el-table-column>
+            <el-table-column align="center" label="操作" prop="id">
+              <template slot-scope="scope">
+                <el-button @click.native.prevent="deleteGoods(scope.row.id)" type="danger" icon="el-icon-delete" circle></el-button>
+              </template>
+            </el-table-column>
+          </el-table>
         </div>
-        <el-table :data="goodsData" stripe height="450">
-          <el-table-column align="center" prop="name" label="商品名称"></el-table-column>
-          <el-table-column align="center" prop="stock" label="库存"></el-table-column>
-          <el-table-column align="center" prop="teamBuyPrice" label="拼团价格"></el-table-column>
-          <el-table-column align="center" prop="discountPrice" label="单团优惠估算"> </el-table-column>
-          <el-table-column align="center" label="操作" prop="id">
-            <template slot-scope="scope">
-              <el-button @click.native.prevent="deleteGoods(scope.row.id)" type="danger" icon="el-icon-delete" circle></el-button>
-            </template>
-          </el-table-column>
-        </el-table>
       </div>
     </div>
   </div>
@@ -124,12 +125,15 @@ export default {
     font-weight: bold;
     font-size: 15px;
   }
-  .section {
-    padding: 3%;
-    width: 75%;
+  #create-campagin {
+    padding: 40px;
     font-size: 14px;
-    margin: 40px auto;
-    box-shadow: 3px 1px 5px rgba(7, 0, 22, 0.25);
+    background-color: rgba(216,223,227,.3);
+    box-shadow: inset 0 0 0.75rem rgba(0,0,0,.25);
+  }
+  .content{
+    background-color: #fff;
+    padding: 40px;
   }
   .re-input {
     width: 400px;
@@ -140,8 +144,7 @@ export default {
   .title {
     font-size: 24px;
     font-weight: bold;
-    margin: -10px 0 20px;
-    color: #F56C6C;
+    margin: -10px 40px 20px;
   }
   .rules {
     margin: 20px 0;
@@ -168,5 +171,28 @@ export default {
   .button-group {
     float: right;
     margin-bottom: 10px;
+  }
+
+  .new-add{
+    width: 127px;
+    height: 36px;
+    line-height: 36px;
+    background: #7662fe;
+    box-shadow: 0 3px 9px 0 rgba(123, 125, 229, 0.75);
+    border-radius: 2px;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+    i {
+      padding: 5px 10px 5px 0;
+      font-weight: bold;
+    }
+  }
+
+  .el-tag--warning {
+    background-color: rgba(123, 125, 229,.1);
+    border-color: rgba(123, 125, 229,.2);
+    color: #9787ff;
   }
 </style>
