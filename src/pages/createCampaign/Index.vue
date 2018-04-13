@@ -13,7 +13,8 @@
         range-separator="至"
         start-placeholder="开始日期"
         end-placeholder="结束日期"
-        align="left">
+        align="left"
+        name="campaign-time">
       </el-date-picker>
     </div>
     <hr>
@@ -21,16 +22,16 @@
       <p class="label-name rules">拼团规则: </p>
       <div class="rules-content">
         <label class="label-name">拼团时效：</label>
-        <el-input-number v-model="teamValid" :min="1" label="拼团时效"></el-input-number>
-        <el-tag class="tag" type="warning"><i class="el-icon-bell icon"></i>单位: 小时</el-tag>
+        <el-input-number name="team-valid" v-model="teamValid" :min="1" label="拼团时效"></el-input-number>
+        <el-tag name="team-valid-tag" class="tag" type="warning"><i class="el-icon-bell icon"></i>单位: 小时</el-tag>
         <div class="input-group">
           <label class="label-name">拼团折扣：</label>
-          <el-input-number v-model="discount" :min="0.1" :step="0.1" :max="10" label="拼团时效"></el-input-number>
-          <el-tag class="tag" type="warning"><i class="el-icon-bell icon"></i>例如: 八五折对于8.5</el-tag>
+          <el-input-number name="team-discount" v-model="discount" :min="0.1" :step="0.1" :max="10" label="拼团折扣"></el-input-number>
+          <el-tag name="team-discount-tag" class="tag" type="warning"><i class="el-icon-bell icon"></i>例如: 八五折对于8.5</el-tag>
         </div>
         <div class="input-group">
           <label class="label-name">成团人数：</label>
-          <el-input-number v-model="peopleNum" :min="2" :step="1" label="成团人数"></el-input-number>
+          <el-input-number name="people-num" v-model="peopleNum" :min="2" :step="1" label="成团人数"></el-input-number>
         </div>
       </div>
     </div>
@@ -38,7 +39,7 @@
       <p class="label-name">拼团商品</p>
       <div class="goods-list">
         <div class="button-group">
-          <el-button type="primary" icon="el-icon-plus">新增</el-button>
+          <el-button name="add-btn" type="primary" icon="el-icon-plus">新增</el-button>
         </div>
         <el-table :data="goodsData" stripe height="450">
           <el-table-column align="center" prop="name" label="商品名称"></el-table-column>
