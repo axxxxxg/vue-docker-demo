@@ -39,7 +39,7 @@
         <p class="label-name">拼团商品</p>
         <div class="goods-list">
           <div class="button-group">
-            <button class="new-add"><i class="el-icon-plus"></i>新增</button>
+            <goods-list :isShow="showGoodsList"></goods-list>
           </div>
           <el-table :data="goodsData" stripe height="450">
             <el-table-column align="center" prop="name" label="商品名称"></el-table-column>
@@ -54,15 +54,21 @@
           </el-table>
         </div>
       </div>
+      <el-button type="danger" class="save-btn">保存</el-button>
     </div>
   </div>
 </template>
 
 <script>
+import GoodsList from '@/components/GoodsList.vue'
 export default {
   name: 'create-campaign',
+  components: {
+    GoodsList
+  },
   data () {
     return {
+      showGoodsList: false,
       campaignName: '',
       campaignTime: '',
       teamValid: '',
@@ -133,7 +139,7 @@ export default {
   }
   .content{
     background-color: #fff;
-    padding: 40px;
+    padding: 40px 40px 60px;
   }
   .re-input {
     width: 400px;
@@ -172,27 +178,15 @@ export default {
     float: right;
     margin-bottom: 10px;
   }
-
-  .new-add{
-    width: 127px;
-    height: 36px;
-    line-height: 36px;
-    background: #7662fe;
-    box-shadow: 0 3px 9px 0 rgba(123, 125, 229, 0.75);
-    border-radius: 2px;
-    color: #fff;
-    cursor: pointer;
-    border: 0;
-    outline: none;
-    i {
-      padding: 5px 10px 5px 0;
-      font-weight: bold;
-    }
-  }
-
   .el-tag--warning {
     background-color: rgba(123, 125, 229,.1);
     border-color: rgba(123, 125, 229,.2);
     color: #9787ff;
+  }
+
+  .save-btn {
+    width: 127px;
+    height: 36px;
+    float: right;
   }
 </style>
