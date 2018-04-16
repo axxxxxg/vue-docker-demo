@@ -2,12 +2,13 @@
   <div>
     <button class="new-add" @click="isShow=true"><i class="el-icon-plus"></i>新增</button>
     <el-dialog title="商品列表" :visible.sync="isShow">
-      <el-table :data="currentData" stripe height="450">
-        <el-table-column type="selection" @row-click="selectGoods"></el-table-column>
+      <el-table :data="currentData" stripe height="450" @selection-change="selectGoods">
+        <el-table-column type="selection"></el-table-column>
         <el-table-column align="center" prop="id" label="商品编号"></el-table-column>
         <el-table-column align="center" prop="name" label="商品名称"></el-table-column>
         <el-table-column align="center" prop="stock" label="库存"></el-table-column>
-        <el-table-column align="center" prop="price" label="价格"></el-table-column>
+        <el-table-column align="center" prop="teamBuyPrice" label="拼团价格"></el-table-column>
+        <el-table-column align="center" prop="discountPrice" label="单团优惠估算"> </el-table-column>
       </el-table>
       <div slot="footer" class="dialog-footer">
         <el-pagination
@@ -17,7 +18,7 @@
           :total="total">
         </el-pagination>
         <el-button @click="isShow = false">取 消</el-button>
-        <el-button type="primary" @click="getGoodsList(scope)">确定</el-button>
+        <el-button type="primary" @click="saveSelectGoods()">确定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -33,83 +34,105 @@ export default {
         id: 1,
         name: '烤鸭',
         stock: 20,
-        price: 40
+        teamBuyPrice: 40,
+        discountPrice: 200
       }, {
         id: 2,
         name: '鸡腿',
         stock: 20,
-        price: 60
+        teamBuyPrice: 40,
+        discountPrice: 200
       }, {
         id: 31,
         name: '天津麻花',
         stock: 20,
-        price: 80
+        teamBuyPrice: 40,
+        discountPrice: 200
       }, {
         id: 15,
         name: '煎饼',
         stock: 20,
-        price: 50
+        teamBuyPrice: 40,
+        discountPrice: 200
       }, {
-        id: 15,
-        name: '煎饼',
+        id: 3,
+        name: '夏威夷果',
         stock: 20,
-        price: 50
+        teamBuyPrice: 40,
+        discountPrice: 200
       }, {
-        id: 15,
-        name: '煎饼',
+        id: 4,
+        name: '番茄酱',
         stock: 20,
-        price: 50
+        teamBuyPrice: 60,
+        discountPrice: 200
       }, {
-        id: 15,
-        name: '煎饼',
+        id: 5,
+        name: '沙拉酱',
         stock: 20,
-        price: 50
+        teamBuyPrice: 80,
+        discountPrice: 200
       }, {
-        id: 15,
-        name: '煎饼',
+        id: 6,
+        name: '手抓饼',
         stock: 20,
-        price: 50
+        teamBuyPrice: 50,
+        discountPrice: 200
       }, {
-        id: 15,
-        name: '煎饼',
+        id: 7,
+        name: '鸡蛋卷',
         stock: 20,
-        price: 50
+        teamBuyPrice: 50,
+        discountPrice: 200
       }, {
-        id: 15,
-        name: '煎饼',
+        id: 8,
+        name: '鸡腿',
         stock: 20,
-        price: 50
+        teamBuyPrice: 50,
+        discountPrice: 200
       }, {
-        id: 15,
-        name: '煎饼',
+        id: 9,
+        name: '鸡脚',
         stock: 20,
-        price: 50
+        teamBuyPrice: 50,
+        discountPrice: 200
       }, {
-        id: 15,
-        name: '煎饼',
+        id: 10,
+        name: '鸭脚',
         stock: 20,
-        price: 50
+        teamBuyPrice: 50,
+        discountPrice: 200
       }, {
-        id: 15,
-        name: '煎饼',
+        id: 11,
+        name: '鸭腿',
         stock: 20,
-        price: 50
+        teamBuyPrice: 50,
+        discountPrice: 200
+      }, {
+        id: 12,
+        name: '鸭脖',
+        stock: 20,
+        teamBuyPrice: 50,
+        discountPrice: 200
       }],
       currentData: [],
       currentPage: 1,
-      total: 0
+      total: 0,
+      selectData: []
     }
   },
   created () {
     let temp = this.goodsList.concat([])
     this.total = temp.length
-    this.currentData = temp.splice(0, 9)
+    this.currentData = temp.splice(0, 10)
   },
   methods: {
-    getGoodsList () {
+    saveSelectGoods () {
+      this.isShow = false
+      this.$emit('getSelectGoods', this.selectData)
     },
     selectGoods (row) {
-      console.log(row)
+      this.selectData = row
     },
     handleCurrentChange (index) {
       let temp = this.goodsList.concat([])

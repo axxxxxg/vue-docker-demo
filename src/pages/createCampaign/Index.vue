@@ -39,7 +39,7 @@
         <p class="label-name">拼团商品</p>
         <div class="goods-list">
           <div class="button-group">
-            <goods-list :isShow="showGoodsList"></goods-list>
+            <goods-list v-on:getSelectGoods="selectData" :isShow="showGoodsList"></goods-list>
           </div>
           <el-table :data="goodsData" stripe height="450">
             <el-table-column align="center" prop="name" label="商品名称"></el-table-column>
@@ -74,34 +74,22 @@ export default {
       teamValid: '',
       discount: '',
       peopleNum: '',
-      goodsData: [{
-        id: 1,
-        name: '夏威夷果',
-        stock: 20,
-        teamBuyPrice: 40,
-        discountPrice: 200
-      }, {
-        id: 2,
-        name: '番茄酱',
-        stock: 20,
-        teamBuyPrice: 60,
-        discountPrice: 200
-      }, {
-        id: 31,
-        name: '沙拉酱',
-        stock: 20,
-        teamBuyPrice: 80,
-        discountPrice: 200
-      }, {
-        id: 15,
-        name: '手抓饼',
-        stock: 20,
-        teamBuyPrice: 50,
-        discountPrice: 200
-      }]
+      goodsData: [],
+      GoodsIds: []
+    }
+  },
+  watch: {
+    goodsData (val) {
+      this.GoodsIds = []
+      for (let i = 0; i < val.length; i++) {
+        this.GoodsIds.push(val[i].id)
+      }
     }
   },
   methods: {
+    selectData (val) {
+      this.goodsData = val
+    },
     deleteGoods (goodsId) {
       this.$confirm('是否删除此商品?', '提示', {
         confirmButtonText: '确定',
