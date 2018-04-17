@@ -14,6 +14,7 @@ module.exports = {
     'plugin:vue/essential',
     "plugin:vue/strongly-recommended",
     "plugin:vue/recommended",
+    "standard"
   ],
   // required to lint *.vue files
   plugins: [
@@ -24,6 +25,12 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'dev' ? 'off' : 'error'
+    'no-debugger': process.env.NODE_ENV === 'dev' ? 'off' : 'error',
+    'no-console': 'warn',
+    'no-dupe-args': 'error',
+    'no-dupe-keys': 'error',
+    'no-duplicate-case': 'error',
+    'no-empty': 'warn',
+    'no-const-assign': 'error'
   }
 }

@@ -1,8 +1,8 @@
 <template>
   <div id="edit-campaign">
     <p class="title">编辑活动</p>
-    <campaign 
-      :campaign-data="campaignData" 
+    <campaign
+      :campaign-data="campaignData"
       @saveCampaign="editCampaign"/>
   </div>
 </template>

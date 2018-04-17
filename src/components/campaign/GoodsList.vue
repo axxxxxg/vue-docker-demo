@@ -1,42 +1,42 @@
 <template>
   <div>
-    <button 
-      class="new-add" 
+    <button
+      class="new-add"
       @click="isShow=true"><i class="el-icon-plus"/>新增</button>
-    <el-dialog 
+    <el-dialog
       :visible.sync="isShow"
-      title="商品列表" 
+      title="商品列表"
     >
-      <el-table 
-        ref="goodsListTable" 
-        :data="currentData" 
-        stripe 
-        height="450" 
+      <el-table
+        ref="goodsListTable"
+        :data="currentData"
+        stripe
+        height="450"
         @selection-change="selectGoods">
         <el-table-column type="selection"/>
-        <el-table-column 
-          align="center" 
-          prop="id" 
+        <el-table-column
+          align="center"
+          prop="id"
           label="商品编号"/>
-        <el-table-column 
-          align="center" 
-          prop="name" 
+        <el-table-column
+          align="center"
+          prop="name"
           label="商品名称"/>
-        <el-table-column 
-          align="center" 
-          prop="stock" 
+        <el-table-column
+          align="center"
+          prop="stock"
           label="库存"/>
-        <el-table-column 
-          align="center" 
-          prop="teamBuyPrice" 
+        <el-table-column
+          align="center"
+          prop="teamBuyPrice"
           label="拼团价格"/>
-        <el-table-column 
-          align="center" 
-          prop="discountPrice" 
+        <el-table-column
+          align="center"
+          prop="discountPrice"
           label="单团优惠估算"/>
       </el-table>
-      <div 
-        slot="footer" 
+      <div
+        slot="footer"
         class="dialog-footer">
         <el-pagination
           :total="total"
@@ -45,8 +45,8 @@
           @current-change="handleCurrentChange"
         />
         <el-button @click="isShow = false">取 消</el-button>
-        <el-button 
-          type="primary" 
+        <el-button
+          type="primary"
           @click="saveSelectGoods()">确定</el-button>
       </div>
     </el-dialog>
