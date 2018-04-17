@@ -2,7 +2,7 @@
   <div>
     <button class="new-add" @click="isShow=true"><i class="el-icon-plus"></i>新增</button>
     <el-dialog title="商品列表" :visible.sync="isShow">
-      <el-table :data="currentData" stripe height="450" @selection-change="selectGoods">
+      <el-table ref="goodsListTable" :data="currentData" stripe height="450" @selection-change="selectGoods">
         <el-table-column type="selection"></el-table-column>
         <el-table-column align="center" prop="id" label="商品编号"></el-table-column>
         <el-table-column align="center" prop="name" label="商品名称"></el-table-column>
@@ -130,6 +130,7 @@ export default {
     saveSelectGoods () {
       this.isShow = false
       this.$emit('getSelectGoods', this.selectData)
+      this.$refs.goodsListTable.clearSelection()
     },
     selectGoods (row) {
       this.selectData = row

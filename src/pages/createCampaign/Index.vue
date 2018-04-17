@@ -1,5 +1,5 @@
 <template>
-  <div id="create-campagin">
+  <div id="create-campaign">
     <p class="title">创建活动</p>
     <div class="content">
       <div class="input-group">
@@ -14,6 +14,7 @@
           range-separator="至"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
+          value-format="timestamp"
           align="left">
         </el-date-picker>
       </div>
@@ -42,19 +43,20 @@
             <goods-list v-on:getSelectGoods="selectData" :isShow="showGoodsList"></goods-list>
           </div>
           <el-table :data="goodsData" stripe height="450">
+            <el-table-column align="center" prop="id" label="商品编号"></el-table-column>
             <el-table-column align="center" prop="name" label="商品名称"></el-table-column>
             <el-table-column align="center" prop="stock" label="库存"></el-table-column>
             <el-table-column align="center" prop="teamBuyPrice" label="拼团价格"></el-table-column>
             <el-table-column align="center" prop="discountPrice" label="单团优惠估算"> </el-table-column>
             <el-table-column align="center" label="操作" prop="id">
               <template slot-scope="scope">
-                <el-button @click.native.prevent="deleteGoods(scope.row.id)" type="danger" icon="el-icon-delete" circle></el-button>
+                <el-button class="delete-goods" @click.native.prevent="deleteGoods(scope.row.id)" type="danger" icon="el-icon-delete" circle></el-button>
               </template>
             </el-table-column>
           </el-table>
         </div>
       </div>
-      <el-button type="danger" class="save-btn">保存</el-button>
+      <el-button type="danger" class="save-btn" @click="createCampaign">保存</el-button>
     </div>
   </div>
 </template>
@@ -71,31 +73,51 @@ export default {
       showGoodsList: false,
       campaignName: '',
       campaignTime: '',
-      teamValid: '',
-      discount: '',
-      peopleNum: '',
-      goodsData: [],
-      GoodsIds: []
+      teamValid: 1,
+      discount: 0.1,
+      peopleNum: 2,
+      goodsData: null,
+      goodsIds: []
     }
   },
   watch: {
     goodsData (val) {
-      this.GoodsIds = []
+      this.goodsIds = []
       for (let i = 0; i < val.length; i++) {
-        this.GoodsIds.push(val[i].id)
+        this.goodsIds.push(val[i].id)
       }
     }
   },
   methods: {
     selectData (val) {
-      this.goodsData = val
+      if (this.goodsData === null) {
+        this.goodsData = val
+        return true
+      }
+      val.forEach((item) => {
+        let tag = true
+        this.goodsData.forEach((oldItem) => {
+          if (oldItem.id === item.id) {
+            tag = false
+          }
+        })
+        if (tag) {
+          this.goodsData.push(item)
+        }
+      })
     },
     deleteGoods (goodsId) {
       this.$confirm('是否删除此商品?', '提示', {
         confirmButtonText: '确定',
+        confirmButtonClass: 'confirm-del',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        this.goodsData.forEach((item, index) => {
+          if (item.id === goodsId) {
+            this.goodsData.splice(index, 1)
+          }
+        })
         this.$message({
           type: 'success',
           message: '删除成功!'
@@ -106,6 +128,8 @@ export default {
           message: '已取消删除'
         })
       })
+    },
+    createCampaign () {
     }
   }
 }
@@ -119,7 +143,7 @@ export default {
     font-weight: bold;
     font-size: 15px;
   }
-  #create-campagin {
+  #create-campaign {
     padding: 40px;
     font-size: 14px;
     background-color: rgba(216,223,227,.3);
