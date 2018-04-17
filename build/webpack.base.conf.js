@@ -3,9 +3,11 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const fs = require('fs')
 
 function resolve (dir) {
-  return path.join(__dirname, '..', dir)
+  const appDirectory = fs.realpathSync(process.cwd());
+  return path.resolve(appDirectory, dir);
 }
 
 const createLintingRule = () => ({
@@ -36,6 +38,7 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      '@root':resolve(''),
     }
   },
   module: {

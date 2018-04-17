@@ -1,6 +1,6 @@
 import { shallow } from '@vue/test-utils'
 import Campaign from '@/components/campaign/Campaign'
-import { goodsData, addGoodsData } from './testData'
+import { goodsData, addGoodsData } from '@root/test/testData/testData'
 
 describe('createCampaign', () => {
   const wrapper = shallow(Campaign, {
