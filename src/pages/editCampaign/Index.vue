@@ -1,14 +1,16 @@
 <template>
   <div id="edit-campaign">
     <p class="title">编辑活动</p>
-    <campaign :campaignData="campaignData" v-on:saveCampaign="editCampaign"></campaign>
+    <campaign 
+      :campaign-data="campaignData" 
+      @saveCampaign="editCampaign"/>
   </div>
 </template>
 
 <script>
 import Campaign from '@/components/campaign/Campaign.vue'
 export default {
-  name: 'edit-campaign',
+  name: 'EditCampaign',
   components: {
     Campaign
   },
