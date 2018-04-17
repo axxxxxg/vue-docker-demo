@@ -43,7 +43,7 @@
             label="拼团折扣"/>
           <el-tag
             class="tag"
-            type="warning"><i class="el-icon-bell icon"/>例如: 八五折对于8.5
+            type="warning"><i class="el-icon-bell icon"/>例如: 八五折对应8.5
           </el-tag>
         </div>
         <div class="input-group">
@@ -125,7 +125,7 @@
     props: {
       campaignData: {
         type: Object,
-        default: () => ({}),
+        default: () => ({})
       }
     },
     data() {
