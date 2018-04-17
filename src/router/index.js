@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import CreateCampaign from '@/pages/createCampaign/Index'
+import EditCampaign from '@/pages/editCampaign/Index'
 
 Vue.use(Router)
 
@@ -10,6 +11,10 @@ export default new Router({
       path: '/',
       name: 'CreateCampaign',
       component: CreateCampaign
+    }, {
+      path: '/edit-campaign',
+      name: 'EditCampaign',
+      component: EditCampaign
     }
   ]
 })

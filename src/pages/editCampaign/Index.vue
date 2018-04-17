@@ -1,21 +1,21 @@
 <template>
-  <div id="create-campaign">
-    <p class="title">创建活动</p>
-    <campaign :campaignData="campaignData" v-on:saveCampaign="createCampaign"></campaign>
+  <div id="edit-campaign">
+    <p class="title">编辑活动</p>
+    <campaign :campaignData="campaignData" v-on:saveCampaign="editCampaign"></campaign>
   </div>
 </template>
 
 <script>
 import Campaign from '@/components/campaign/Campaign.vue'
 export default {
-  name: 'create-campaign',
+  name: 'edit-campaign',
   components: {
     Campaign
   },
   data () {
     return {
-      campaignName: '',
-      campaignTime: null,
+      campaignName: '编辑活动',
+      campaignTime: [1523289600000, 1527696000000],
       teamValid: 1,
       discount: 0.1,
       peopleNum: 2,
@@ -36,15 +36,15 @@ export default {
     }
   },
   methods: {
-    createCampaign (val) {
+    editCampaign (val) {
       console.log(val)
     }
   }
 }
 </script>
 
-<style rel="stylesheet/scss" lang="scss" scoped>
-  #create-campaign {
+<style scoped>
+  #edit-campaign {
     padding: 40px;
     font-size: 14px;
     background-color: rgba(216,223,227,.3);
