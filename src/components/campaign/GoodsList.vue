@@ -1,24 +1,53 @@
 <template>
   <div>
-    <button class="new-add" @click="isShow=true"><i class="el-icon-plus"></i>新增</button>
-    <el-dialog title="商品列表" :visible.sync="isShow">
-      <el-table ref="goodsListTable" :data="currentData" stripe height="450" @selection-change="selectGoods">
-        <el-table-column type="selection"></el-table-column>
-        <el-table-column align="center" prop="id" label="商品编号"></el-table-column>
-        <el-table-column align="center" prop="name" label="商品名称"></el-table-column>
-        <el-table-column align="center" prop="stock" label="库存"></el-table-column>
-        <el-table-column align="center" prop="teamBuyPrice" label="拼团价格"></el-table-column>
-        <el-table-column align="center" prop="discountPrice" label="单团优惠估算"> </el-table-column>
+    <button 
+      class="new-add" 
+      @click="isShow=true"><i class="el-icon-plus"/>新增</button>
+    <el-dialog 
+      :visible.sync="isShow"
+      title="商品列表" 
+    >
+      <el-table 
+        ref="goodsListTable" 
+        :data="currentData" 
+        stripe 
+        height="450" 
+        @selection-change="selectGoods">
+        <el-table-column type="selection"/>
+        <el-table-column 
+          align="center" 
+          prop="id" 
+          label="商品编号"/>
+        <el-table-column 
+          align="center" 
+          prop="name" 
+          label="商品名称"/>
+        <el-table-column 
+          align="center" 
+          prop="stock" 
+          label="库存"/>
+        <el-table-column 
+          align="center" 
+          prop="teamBuyPrice" 
+          label="拼团价格"/>
+        <el-table-column 
+          align="center" 
+          prop="discountPrice" 
+          label="单团优惠估算"/>
       </el-table>
-      <div slot="footer" class="dialog-footer">
+      <div 
+        slot="footer" 
+        class="dialog-footer">
         <el-pagination
-          @current-change="handleCurrentChange"
+          :total="total"
           :current-page="currentPage"
           layout="total, prev, pager, next, jumper"
-          :total="total">
-        </el-pagination>
+          @current-change="handleCurrentChange"
+        />
         <el-button @click="isShow = false">取 消</el-button>
-        <el-button type="primary" @click="saveSelectGoods()">确定</el-button>
+        <el-button 
+          type="primary" 
+          @click="saveSelectGoods()">确定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -26,7 +55,7 @@
 
 <script>
 export default {
-  name: 'goods-list',
+  name: 'GoodsList',
   data () {
     return {
       isShow: false,

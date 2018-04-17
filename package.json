@@ -13,9 +13,10 @@
     "build:sit": "cross-env NODE_ENV=sit node build/build.js",
     "build:uat": "cross-env NODE_ENV=uat node build/build.js",
     "build": "yarn build:prod",
-    "lint": " yarn eslint -c .eslintrc.js 'src/**'",
+    "lint": " yarn eslint -c .eslintrc.js 'src/**/*.{js,vue}'",
     "precommit": "yarn lint && yarn test",
-    "watch": "yarn watch_test"
+    "watch": "yarn watch_test",
+    "prepush": "yarn lint && yarn test"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.12",
