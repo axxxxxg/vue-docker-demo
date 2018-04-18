@@ -8,15 +8,12 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "yarn dev",
     "test": "mocha-webpack --webpack-config test/mocha.config.js --require test/setup.js test/**/*.spec.js",
-    "watch_test": "mocha-webpack --watch --webpack-config test/mocha.config.js --require test/setup.js test/**/*.spec.js",
     "build:prod": "cross-env NODE_ENV=production node build/build.js",
     "build:sit": "cross-env NODE_ENV=sit node build/build.js",
     "build:uat": "cross-env NODE_ENV=uat node build/build.js",
     "build": "yarn build:prod",
     "lint": " yarn eslint -c .eslintrc.js 'src/**/*.{js,vue}'",
-    "precommit": "yarn lint && yarn test",
-    "watch": "yarn watch_test",
-    "prepush": "yarn lint && yarn test"
+    "precommit": "yarn lint && yarn test"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.12",
