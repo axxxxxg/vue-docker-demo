@@ -40,7 +40,6 @@
     },
     methods: {
       editCampaign(val) {
-        console.log(val)
       }
     }
   }

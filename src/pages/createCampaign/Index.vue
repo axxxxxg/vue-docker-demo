@@ -40,7 +40,6 @@
     },
     methods: {
       createCampaign(val) {
-        console.log(val)
       }
     }
   }
