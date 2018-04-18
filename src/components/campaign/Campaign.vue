@@ -115,101 +115,101 @@
 </template>
 
 <script>
-import GoodsList from './GoodsList.vue'
+  import GoodsList from './GoodsList.vue'
 
-export default {
-  name: 'Campaign',
-  components: {
-    GoodsList
-  },
-  props: {
-    campaignData: {
-      type: Object,
-      default: () => ({})
-    }
-  },
-  data () {
-    return {
-      goodsIds: [],
-      showGoodsList: false,
-      goodsData: null,
-      campaignName: '',
-      campaignTime: [],
-      teamValid: 1,
-      discount: 0.1,
-      peopleNum: 2
-    }
-  },
-  watch: {
-    goodsData (val) {
-      this.goodsIds = []
-      for (let i = 0; i < val.length; i++) {
-        this.goodsIds.push(val[i].id)
+  export default {
+    name: 'Campaign',
+    components: {
+      GoodsList
+    },
+    props: {
+      campaignData: {
+        type: Object,
+        default: () => ({})
       }
-    }
-  },
-  beforeMount () {
-    this.goodsData = this.campaignData.goodsData
-    this.campaignName = this.campaignData.campaignName
-    this.campaignTime = this.campaignData.campaignTime
-    this.teamValid = this.campaignData.teamValid
-    this.discount = this.campaignData.discount
-    this.peopleNum = this.campaignData.peopleNum
-  },
-  methods: {
-    selectData (val) {
-      if (this.goodsData === null) {
-        this.goodsData = val
-        return true
+    },
+    data() {
+      return {
+        goodsIds: [],
+        showGoodsList: false,
+        goodsData: null,
+        campaignName: '',
+        campaignTime: [],
+        teamValid: 1,
+        discount: 0.1,
+        peopleNum: 2
       }
-      val.forEach((item) => {
-        let tag = true
-        this.goodsData.forEach((oldItem) => {
-          if (oldItem.id === item.id) {
-            tag = false
-          }
-        })
-        if (tag) {
-          this.goodsData.push(item)
+    },
+    watch: {
+      goodsData(val) {
+        this.goodsIds = []
+        for (let i = 0; i < val.length; i++) {
+          this.goodsIds.push(val[i].id)
         }
-      })
+      }
     },
-    deleteGoods (goodsId) {
-      this.$confirm('是否删除此商品?', '提示', {
-        confirmButtonText: '确定',
-        confirmButtonClass: 'confirm-del',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.goodsData.forEach((item, index) => {
-          if (item.id === goodsId) {
-            this.goodsData.splice(index, 1)
+    beforeMount() {
+      this.goodsData = this.campaignData.goodsData
+      this.campaignName = this.campaignData.campaignName
+      this.campaignTime = this.campaignData.campaignTime
+      this.teamValid = this.campaignData.teamValid
+      this.discount = this.campaignData.discount
+      this.peopleNum = this.campaignData.peopleNum
+    },
+    methods: {
+      selectData(val) {
+        if (this.goodsData === null) {
+          this.goodsData = val
+          return true
+        }
+        val.forEach((item) => {
+          let tag = true
+          this.goodsData.forEach((oldItem) => {
+            if (oldItem.id === item.id) {
+              tag = false
+            }
+          })
+          if (tag) {
+            this.goodsData.push(item)
           }
         })
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
+      },
+      deleteGoods(goodsId) {
+        this.$confirm('是否删除此商品?', '提示', {
+          confirmButtonText: '确定',
+          confirmButtonClass: 'confirm-del',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.goodsData.forEach((item, index) => {
+            if (item.id === goodsId) {
+              this.goodsData.splice(index, 1)
+            }
+          })
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
         })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
-      })
-    },
-    saveCampaign () {
-      let data = {
-        campaignName: this.campaignName,
-        campaignTime: this.campaignTime,
-        teamValid: this.teamValid,
-        discount: this.discount,
-        peopleNum: this.peopleNum,
-        goodsIds: this.goodsIds
+      },
+      saveCampaign() {
+        let data = {
+          campaignName: this.campaignName,
+          campaignTime: this.campaignTime,
+          teamValid: this.teamValid,
+          discount: this.discount,
+          peopleNum: this.peopleNum,
+          goodsIds: this.goodsIds
+        }
+        this.$emit('saveCampaign', data)
       }
-      this.$emit('saveCampaign', data)
     }
   }
-}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
