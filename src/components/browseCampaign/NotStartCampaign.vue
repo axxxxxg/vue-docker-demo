@@ -68,19 +68,19 @@
 </template>
 
 <script>
-  export default {
-    name: 'NotStartCampaign',
-    data() {
-      return {
-        campaignName: '活动',
-        campaignTime: [1523289600000, 1527696000000],
-        teamValid: 1,
-        discount: 0.1,
-        peopleNum: 2,
-        goodsData: null
-      }
+export default {
+  name: 'NotStartCampaign',
+  data () {
+    return {
+      campaignName: '活动',
+      campaignTime: [1523289600000, 1527696000000],
+      teamValid: 1,
+      discount: 0.1,
+      peopleNum: 2,
+      goodsData: null
     }
   }
+}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>

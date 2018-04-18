@@ -7,26 +7,26 @@
 </template>
 
 <script>
-  import NotStartCampaign from '@/components/browseCampaign/NotStartCampaign'
-  import BegunCampaign from '@/components/browseCampaign/BegunCampaign'
+import NotStartCampaign from '@/components/browseCampaign/NotStartCampaign'
+import BegunCampaign from '@/components/browseCampaign/BegunCampaign'
 
-  export default {
-    name: 'BrowseCampaign',
-    components: {
-      NotStartCampaign,
-      BegunCampaign
-    },
-    data() {
-      return {
-        campaignName: '',
-        campaignTime: [1523289600000, 1527696000000],
-        teamValid: 1,
-        discount: 0.1,
-        peopleNum: 2,
-        goodsData: null
-      }
+export default {
+  name: 'BrowseCampaign',
+  components: {
+    NotStartCampaign,
+    BegunCampaign
+  },
+  data () {
+    return {
+      campaignName: '',
+      campaignTime: [1523289600000, 1527696000000],
+      teamValid: 1,
+      discount: 0.1,
+      peopleNum: 2,
+      goodsData: null
     }
   }
+}
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
