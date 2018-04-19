@@ -4,4 +4,4 @@ WORKDIR /app
 COPY . /app/
 EXPOSE 80
 RUN  yarn install \     && yarn build \     && cp -r dist/* /var/www/html \     && rm -rf /app
-CMD ["nginx","-g","daemon off;"]
+CMD ["nginx","-g","daemon off;"] 
